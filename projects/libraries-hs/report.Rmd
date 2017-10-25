@@ -1,0 +1,136 @@
+---
+title: "Education and Library Patronage"
+author:
+- affiliation: Phillips Academy
+  name: Rudd Fawcett
+geometry: margin=1in
+output:
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: xelatex
+    template: template.tex
+header-includes:
+  - \usepackage{fontspec}
+  - \setmainfont{Times New Roman}
+  - \setlength\parindent{2em}
+  - \setlength\parskip{0em}
+  - \usepackage{indentfirst}
+  - \usepackage[bottom]{footmisc}
+  - \usepackage{etoolbox}
+  - \AtBeginEnvironment{quote}{\singlespacing\small}
+link-citations: yes
+linkcolor: black
+urlcolor: black
+citecolor: black
+abstract: "This study examines the association between a state’s degree of education, quantified by the public high school graduation rate, and the users of public libraries on a per 100,000 person basis to attempt to answer the question: are smarter states using libraries more?"
+fontsize: 12pt
+spacing: double
+mainfont: Arial
+---
+
+```{r echo=FALSE}
+library('ggplot2')
+library('ggthemes')
+library('kableExtra')
+
+data <- read.csv(file='data/libraries-clean.csv', sep=',', head=TRUE)
+```
+
+\newpage
+
+# Introduction
+Reading makes you smarter. You’ve heard it from your parents and teachers, and their claim is well documented. Though intelligence or “smarts” may be relatively unquantifiable measures, reading is a proven intellectual exercise that expands your vocabulary and capacity for analytical thinking, for example.[^1] For many Americans, however, books are a commodity item, nonessential in comparison to food and other basics. Thankfully, the United States is home to the fifth largest public library system in the world, according to a recent study of global data and statistics compiled by the Online Computer Library (OCLC). With over 9,000 total libraries — almost three libraries for every 100,000 citizens as of 2012 — “libraries are a quintessential part of how Americans learn and engage with their local communities.”[^2]
+
+With such access to books and knowledge, it would seem that there is a correlation between a quantifiable measure of intelligence or academic achievement — public high school graduation rates — and the users of public libraries per 100,000 people. So, do smarter people use libraries more? Examining individual states and regions across America, this study aims to answer that question using data from the National Center for Education Statistics (NCES) and the Institute of Museum and Library Services (IMLS) from the 2014 fiscal year.
+
+# Variables and Definitions
+
+Throughout this study, two variables will primarily examined: NCES reported graduation rate of public high schools by state, and IMLS reported users of public libraries by state. It is important that both of these variables measure publically accessible institutions, as there is thus a determination that all citizens could be included in both pools.
+
+NCES public high school graduation rates are measured as an Adjusted Cohort Graduation Rate (ACGR), which tracks transfers and those who graduate within four years with a high school diploma. The NCES defines such graduation rate as, simply: “the percentage of public high school students who graduate on time.”[^3] These rates will serve as a quantifiable measurement of education by state. Public high school graduation rates by state will hence be known as “graduation rates.”
+
+Library users from the IMLS have been adjusted per state population, and are reported on a per 100,000 person basis using population data included in the IMLS report. The IMLS defines “users” as follows:
+
+> “A registered user is a library user who has applied for and received an identification number or card from the public library that has established conditions under which the user may borrow library materials or gain access to other library resources. Note: Files should have been purged within the past three (3) years.”[^4]
+
+Public library users on a per 100,000 person per state basis will hence be known as “library users.”
+
+For the purposes of this study, graduation rates will serve as the explanatory variable and library users as a response variable. This decision will serve the fundamental driving question of: “ Are smarter people using libraries more?” As previously mentioned, all data is per the 2014 fiscal year.
+
+# Analysis
+
+Before examining the relationship between library users and graduation rates, it is important to first contextualize and analyze the distribution of public libraries and their users across America using a modified Tufte-style boxplot to visualize the data.
+
+\vspace{20pt}
+
+```{r echo=FALSE, fig.cap = "Distribution of public libraries across America by state.", fig.width=6, fig.height=1, cache=TRUE, message=FALSE}
+source('visualizations/libraries/count.r')
+```
+
+```{r echo=FALSE}
+knitr::kable(t(as.matrix(summary(data$Libraries.per.HundredK, digits=3))))
+```
+
+\vspace{10pt}
+
+As is apparent in Figure 1, there is a positive-skew distribution in the data over the range from 2.797 libraries per 100,000 people to 30.002 libraries per 100,000 people. The positive-skew can also be seen in the summary statistics for the boxplot, as the mean is greater than the median. Given that the interquartile range is relatively small in comparison to the range of the entire data set, there is rather little variability in terms of the overall distribution of libraries per 100,000 people. Six outlying states, such as Vermont (30.002 libraries per 100,000 people) and Maine (20.375 libraries per 100,000 people) are responsible for pulling the skew in the positive direction. On average, states have 8.037 libraries per 100,000 people as calculated in relation to the state’s population.
+
+Unlike the distribution of libraries by state, the users of such libraries is approximately normal.
+
+\vspace{20pt}
+
+```{r echo=FALSE, fig.cap = "Distribution of library users.", fig.width=6, fig.height=1, cache=TRUE, message=FALSE}
+source('visualizations/libraries/users.r')
+```
+
+```{r echo=FALSE}
+knitr::kable(t(as.matrix(summary(data$Users.per.HundredK, digits=3))))
+```
+
+\vspace{0pt}
+
+Over the range from 3,8053 to 7,8466 users per 100,000 people, the distribution is approximately understood due to the difference between the mean (53,507 users for every 100,000 people) and median (54,413 users for every 100,000 people). Ohio (78,466 users for every 100,000 people) and Minnesota (75,319 users for every 100,000 people) are the only two outliers in the dataset and lie in the positive direction.
+
+\newpage
+
+\vspace{20pt}
+
+```{r echo=FALSE, fig.cap = "Caption", fig.width=6, fig.height=3, cache=TRUE, message=FALSE}
+source('visualizations/associations/scatterplot.r')
+```
+
+```{r echo=FALSE}
+knitr::kable(t(as.matrix(summary(data$Libraries.per.HundredK))))
+```
+
+\vspace{10pt}
+
+\vspace{20pt}
+
+```{r echo=FALSE, fig.cap = "Caption", fig.width=6, fig.height=3, cache=TRUE, message=FALSE}
+source('visualizations/associations/regression.r')
+```
+
+```{r echo=FALSE}
+knitr::kable(t(as.matrix(summary(data$Libraries.per.HundredK))))
+```
+
+\vspace{10pt}
+
+\newpage
+
+```{r echo=FALSE}
+source('visualizations/appendix.r')
+```
+
+
+[^1]: Test footnote 1.
+[^2]: Test footnote 1.
+
+<style>
+p.caption {
+  font-size: 10pt;
+}
+</style>
