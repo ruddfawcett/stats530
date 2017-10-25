@@ -6,8 +6,8 @@ plot <- ggplot(data, aes(x=Graduation.Rate, y=Users.per.HundredK)) +
         labs(
              #  title='State Diplomas and Public Libraries',
              #  subtitle='State by state, is there an association between the public high school graduation rate and the number of libraries per 100k people?',
-             x='Public High School Graduation Rate',
-             y='User per 100k People'
+             x='Graduation Rates',
+             y='Library Users'
 
             #  size='Users per 100k People',
             #  color='Region',

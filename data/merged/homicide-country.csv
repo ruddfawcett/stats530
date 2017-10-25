@@ -1,0 +1,207 @@
+Count,Country,Rate,Year
+712,Afghanistan,2.4,2008
+127,Albania,4.0,2010
+516,Algeria,1.5,2008
+1,Andorra,1.3,2004
+3426,Angola,19.0,2008
+1,Anguilla,6.8,2008
+6,Antigua and Barbuda,6.8,2010
+1360,Argentina,3.4,2009
+44,Armenia,1.4,2010
+229,Australia,1.0,2010
+53,Austria,0.6,2010
+206,Azerbaijan,2.2,2010
+94,Bahamas,27.4,2010
+6,Bahrain,0.6,2008
+3988,Bangladesh,2.7,2010
+31,Barbados,11.3,2010
+473,Belarus,4.9,2009
+180,Belgium,1.7,2010
+129,Belize,41.4,2010
+1262,Benin,15.1,2008
+8,Bermuda,12.3,2011
+7,Bhutan,1.0,2008
+884,Bolivia (Plurinational State of),8.9,2010
+56,Bosnia and Herzegovina,1.5,2010
+287,Botswana,14.5,2009
+40974,Brazil,21.0,2010
+2,British Virgin Islands,8.6,2006
+2,Brunei Darussalam,0.5,2006
+147,Bulgaria,2.0,2010
+2786,Burkina Faso,18.0,2008
+1726,Burundi,21.7,2008
+448,Cambodia,3.4,2005
+3700,Cameroon,19.7,2008
+554,Canada,1.6,2010
+56,Cape Verde,11.6,2007
+5,Cayman Islands,8.4,2008
+1240,Central African Republic,29.3,2008
+1686,Chad,15.8,2008
+541,Chile,3.2,2010
+13410,China,1.0,2010
+15459,Colombia,33.4,2010
+85,Comoros,12.2,2008
+1180,Congo,30.8,2008
+527,Costa Rica,11.3,2010
+10801,Cote d'Ivoire,56.9,2008
+62,Croatia,1.4,2010
+563,Cuba,5.0,2009
+19,Cyprus,1.7,2009
+181,Czech Republic,1.7,2009
+3658,Democratic People's Republic of Korea,15.2,2008
+13558,Democratic Republic of the Congo,21.7,2008
+47,Denmark,0.9,2009
+29,Djibouti,3.4,2008
+15,Dominica,22.1,2010
+2513,Dominican Republic,25.0,2011
+2638,Ecuador,18.2,2010
+992,Egypt,1.2,2009
+4308,El Salvador,69.2,2011
+137,Equatorial Guinea,20.7,2008
+879,Eritrea,17.8,2008
+70,Estonia,5.2,2010
+20239,Ethiopia,25.5,2008
+23,Fiji,2.8,2004
+118,Finland,2.2,2010
+682,France,1.1,2009
+30,French Guiana,13.3,2009
+1,French Polynesia,0.4,2009
+200,Gabon,13.8,2008
+176,Gambia,10.8,2008
+187,Georgia,4.3,2010
+690,Germany,0.8,2010
+3646,Ghana,15.7,2008
+176,Greece,1.5,2010
+11,Greenland,19.2,2009
+12,Grenada,11.5,2010
+32,Guadeloupe,7.0,2009
+1,Guam,0.6,2007
+5681,Guatemala,38.5,2011
+2152,Guinea,22.5,2008
+294,Guinea-Bissau,20.2,2008
+140,Guyana,18.6,2010
+689,Haiti,6.9,2010
+7104,Honduras,91.6,2011
+17,Hong Kong Special Administrative Region of China,0.2,2011
+133,Hungary,1.3,2010
+1,Iceland,0.3,2009
+40752,India,3.4,2009
+18963,Indonesia,8.1,2008
+2215,Iran (Islamic Republic of),3.0,2009
+608,Iraq,2.0,2008
+54,Ireland,1.2,2010
+159,Israel,2.1,2011
+529,Italy,0.9,2010
+1430,Jamaica,52.2,2010
+506,Japan,0.4,2009
+100,Jordan,1.8,2006
+1418,Kazakhstan,8.8,2010
+7733,Kenya,20.1,2008
+7,Kiribati,7.3,2008
+59,Kuwait,2.2,2009
+1072,Kyrgyzstan,20.1,2010
+279,Lao People's Democratic Republic,4.6,2008
+70,Latvia,3.1,2010
+95,Lebanon,2.2,2010
+764,Lesotho,35.2,2010
+371,Liberia,10.1,2008
+176,Libyan Arab Jamahiriya,2.9,2008
+1,Liechtenstein,2.8,2009
+219,Lithuania,6.6,2010
+12,Luxembourg,2.5,2008
+4,Macao Special Administrative Region of China,0.7,2010
+1588,Madagascar,8.1,2008
+5039,Malawi,36.0,2008
+604,Malaysia,2.3,2006
+5,Maldives,1.6,2008
+1157,Mali,8.0,2008
+4,Malta,1.0,2010
+17,Martinique,4.2,2009
+485,Mauritania,14.7,2008
+33,Mauritius,2.5,2010
+25757,Mexico,22.7,2010
+1,Micronesia (Federated States of),0.9,2008
+0,Monaco,0.0,2008
+239,Mongolia,8.7,2010
+22,Montenegro,3.5,2009
+1,Montserrat,19.7,2008
+447,Morocco,1.4,2010
+1925,Mozambique,8.8,2007
+4800,Myanmar,10.2,2008
+352,Namibia,17.2,2004
+1,Nauru,9.8,2008
+818,Nepal,2.8,2009
+179,Netherlands,1.1,2009
+39,New Zealand,0.9,2011
+785,Nicaragua,13.6,2010
+552,Niger,3.8,2008
+18422,Nigeria,12.2,2008
+29,Norway,0.6,2010
+145,Occupied Palestinian Territory,4.1,2005
+18,Oman,0.7,2008
+13860,Pakistan,7.8,2011
+0,Palau,0.0,2008
+759,Panama,21.6,2010
+854,Papua New Guinea,13.0,2008
+741,Paraguay,11.5,2010
+2969,Peru,10.3,2009
+4947,Philippines,5.4,2009
+436,Poland,1.1,2010
+124,Portugal,1.2,2010
+983,Puerto Rico,26.2,2010
+13,Qatar,0.9,2008
+1251,Republic of Korea,2.6,2010
+267,Republic of Moldova,7.5,2010
+421,Romania,2.0,2009
+14574,Russian Federation,10.2,2010
+1708,Rwanda,17.1,2008
+20,Saint Kitts and Nevis,38.2,2010
+44,Saint Lucia,25.2,2010
+25,Saint Vincent and the Grenadines,22.9,2010
+2,Samoa,1.1,2008
+3,Sao Tome and Principe,1.9,2008
+265,Saudi Arabia,1.0,2007
+1027,Senegal,8.7,2008
+123,Serbia,1.2,2010
+7,Seychelles,8.3,2006
+837,Sierra Leone,14.9,2008
+16,Singapore,0.3,2011
+84,Slovakia,1.5,2009
+15,Slovenia,0.7,2010
+19,Solomon Islands,3.7,2008
+138,Somalia,1.5,2008
+15940,South Africa,31.8,2010
+390,Spain,0.8,2010
+745,Sri Lanka,3.6,2010
+10028,Sudan,24.2,2008
+24,Suriname,4.6,2009
+141,Swaziland,12.9,2004
+91,Sweden,1.0,2010
+52,Switzerland,0.7,2010
+463,Syrian Arab Republic,2.3,2010
+143,Tajikistan,2.1,2010
+3307,Thailand,4.8,2011
+40,The former Yugoslav Republic of Macedonia,1.9,2010
+75,Timor-Leste,6.9,2008
+627,Togo,10.9,2008
+1,Tonga,1.0,2008
+472,Trinidad and Tobago,35.2,2010
+117,Tunisia,1.1,2008
+2320,Turkey,3.3,2008
+203,Turkmenistan,4.2,2006
+3,Turks and Caicos Islands,8.7,2009
+11373,Uganda,36.3,2008
+2356,Ukraine,5.2,2010
+39,United Arab Emirates,0.8,2006
+722,United Kingdom of Great Britain and Northern Ireland,1.2,2009
+10357,United Republic of Tanzania,24.5,2008
+12996,United States of America,4.2,2010
+43,United States Virgin Islands,39.2,2007
+199,Uruguay,5.9,2011
+831,Uzbekistan,3.1,2008
+2,Vanuatu,0.9,2008
+13080,Venezuela (Bolivarian Republic of),45.1,2010
+1346,Viet Nam,1.6,2008
+990,Yemen,4.2,2009
+4710,Zambia,38.0,2008
+1775,Zimbabwe,14.3,2008

@@ -1,4 +1,5 @@
 base
+knitr
 ggplot2
 ggthemes
 kableExtra

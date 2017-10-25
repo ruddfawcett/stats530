@@ -1,16 +1,17 @@
 ---
 title: "Education and Library Patronage"
 author:
-- affiliation: Phillips Academy
+  affiliation: Phillips Academy
   name: Rudd Fawcett
-geometry: margin=1in
+citecolor: black
 output:
   pdf_document:
-    citation_package: natbib
-    keep_tex: true
-    fig_caption: true
+    fig_caption: yes
+    keep_tex: yes
     latex_engine: xelatex
     template: template.tex
+  html_document: default
+geometry: margin=1in
 header-includes:
   - \usepackage{fontspec}
   - \setmainfont{Times New Roman}
@@ -20,15 +21,21 @@ header-includes:
   - \usepackage[bottom]{footmisc}
   - \usepackage{etoolbox}
   - \AtBeginEnvironment{quote}{\singlespacing\small}
+  - \usepackage{caption}
+  - \captionsetup[table]{labelformat=empty}
 link-citations: yes
 linkcolor: black
-urlcolor: black
-citecolor: black
-abstract: "This study examines the association between a state’s degree of education, quantified by the public high school graduation rate, and the users of public libraries on a per 100,000 person basis to attempt to answer the question: are smarter states using libraries more?"
+mainfont: Arial
 fontsize: 12pt
 spacing: double
-mainfont: Arial
+abstract: "This study examines the association between a state’s degree of education, quantified by the public high school graduation rate, and the users of public libraries on a per 100,000 person basis to attempt to answer the question: are smarter states using libraries more?"
+urlcolor: black
 ---
+
+```{r global_options, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(fig.pos = '!h')
+```
 
 ```{r echo=FALSE}
 library('ggplot2')
@@ -41,31 +48,32 @@ data <- read.csv(file='data/libraries-clean.csv', sep=',', head=TRUE)
 \newpage
 
 # Introduction
-Reading makes you smarter. You’ve heard it from your parents and teachers, and their claim is well documented. Though intelligence or “smarts” may be relatively unquantifiable measures, reading is a proven intellectual exercise that expands your vocabulary and capacity for analytical thinking, for example.[^1] For many Americans, however, books are a commodity item, nonessential in comparison to food and other basics. Thankfully, the United States is home to the fifth largest public library system in the world, according to a recent study of global data and statistics compiled by the Online Computer Library (OCLC). With over 9,000 total libraries — almost three libraries for every 100,000 citizens as of 2012 — “libraries are a quintessential part of how Americans learn and engage with their local communities.”[^2]
+Reading makes you smarter. You’ve heard it from your parents and teachers, and their claim is well documented. Though intelligence or “smarts” may be relatively unquantifiable measures, reading is a proven intellectual exercise that expands your vocabulary and capacity for analytical thinking, for example.[^1] For many Americans, however, books are a commodity item, nonessential in comparison to food and other basics. Thankfully, the United States is home to the fifth largest public library system in the world, according to a recent study of global data and statistics compiled by the Online Computer Library (OCLC).[^2] With over 9,000 total libraries — almost three libraries for every 100,000 citizens as of 2012 — “libraries are a quintessential part of how Americans learn and engage with their local communities.”[^3]
 
 With such access to books and knowledge, it would seem that there is a correlation between a quantifiable measure of intelligence or academic achievement — public high school graduation rates — and the users of public libraries per 100,000 people. So, do smarter people use libraries more? Examining individual states and regions across America, this study aims to answer that question using data from the National Center for Education Statistics (NCES) and the Institute of Museum and Library Services (IMLS) from the 2014 fiscal year.
 
+\newpage
+
 # Variables and Definitions
 
-Throughout this study, two variables will primarily examined: NCES reported graduation rate of public high schools by state, and IMLS reported users of public libraries by state. It is important that both of these variables measure publically accessible institutions, as there is thus a determination that all citizens could be included in both pools.
+Throughout this study, two variables will primarily examined: NCES reported graduation rate of public high schools by state and IMLS reported users of public libraries by state. It is important that both of these variables measure publically accessible institutions, as there is thus a determination that all citizens could be included in both pools. Additionally, the total number of public libraries adjusted by state population will be reported on a per 100,00 people per state and region, to be known as “Libraries.”
 
-NCES public high school graduation rates are measured as an Adjusted Cohort Graduation Rate (ACGR), which tracks transfers and those who graduate within four years with a high school diploma. The NCES defines such graduation rate as, simply: “the percentage of public high school students who graduate on time.”[^3] These rates will serve as a quantifiable measurement of education by state. Public high school graduation rates by state will hence be known as “graduation rates.”
+NCES public high school graduation rates are measured as an Adjusted Cohort Graduation Rate (ACGR), which tracks transfers and those who graduate within four years with a high school diploma. The NCES defines such graduation rate as, simply: “the percentage of public high school students who graduate on time.” These rates will serve as a quantifiable measurement of education by state. Public high school graduation rates by state will hence be known as “Graduation Rates.”
 
-Library users from the IMLS have been adjusted per state population, and are reported on a per 100,000 person basis using population data included in the IMLS report. The IMLS defines “users” as follows:
+Library “users” from IMLS data have been adjusted per state population, and are reported on a per 100,000 person per state basis using population data included in the same IMLS report. The IMLS defines “users” — to hence be down as “Library Users” — as follows:
 
 > “A registered user is a library user who has applied for and received an identification number or card from the public library that has established conditions under which the user may borrow library materials or gain access to other library resources. Note: Files should have been purged within the past three (3) years.”[^4]
 
-Public library users on a per 100,000 person per state basis will hence be known as “library users.”
+For the purposes of this study, graduation rates will serve as the explanatory variable and library users as a response variable. This decision will serve the driving question of: “are smarter people using libraries more?” As previously mentioned, all data is per the 2014 fiscal year.
 
-For the purposes of this study, graduation rates will serve as the explanatory variable and library users as a response variable. This decision will serve the fundamental driving question of: “ Are smarter people using libraries more?” As previously mentioned, all data is per the 2014 fiscal year.
+\newpage
 
 # Analysis
 
-Before examining the relationship between library users and graduation rates, it is important to first contextualize and analyze the distribution of public libraries and their users across America using a modified Tufte-style boxplot to visualize the data.
-
+Before examining the relationship between Library Users and Graduation Rates, it is important to first contextualize and analyze the distribution of Libraries and Library Users across America.
 \vspace{20pt}
 
-```{r echo=FALSE, fig.cap = "Distribution of public libraries across America by state.", fig.width=6, fig.height=1, cache=TRUE, message=FALSE}
+```{r echo=FALSE, fig.cap = "Distribution of Librariesacross America.", fig.width=6, fig.height=1, cache=FALSE, message=FALSE}
 source('visualizations/libraries/count.r')
 ```
 
@@ -75,13 +83,13 @@ knitr::kable(t(as.matrix(summary(data$Libraries.per.HundredK, digits=3))))
 
 \vspace{10pt}
 
-As is apparent in Figure 1, there is a positive-skew distribution in the data over the range from 2.797 libraries per 100,000 people to 30.002 libraries per 100,000 people. The positive-skew can also be seen in the summary statistics for the boxplot, as the mean is greater than the median. Given that the interquartile range is relatively small in comparison to the range of the entire data set, there is rather little variability in terms of the overall distribution of libraries per 100,000 people. Six outlying states, such as Vermont (30.002 libraries per 100,000 people) and Maine (20.375 libraries per 100,000 people) are responsible for pulling the skew in the positive direction. On average, states have 8.037 libraries per 100,000 people as calculated in relation to the state’s population.
-
-Unlike the distribution of libraries by state, the users of such libraries is approximately normal.
+As is apparent in Figure 1, there is a positive-skew distribution in the data over the range from 2.797 Libraries to 30.002 Libraries. The positive-skew can also be seen in the summary statistics for the boxplot, as the mean is greater than the median. Given that the interquartile range is relatively small in comparison to the range of the entire data set, there is rather little variability in terms of the overall distribution of Libraries. Six outlying states, such as Vermont (30.002 Libraries) and Maine (20.375 Libraries), are responsible for pulling the skew in the positive direction. On average, states have 8.037 Libraries as calculated in relation to the state’s population.
+\newpage
+Unlike the distribution of Libraries, the data for Library Users is approximately normal.
 
 \vspace{20pt}
 
-```{r echo=FALSE, fig.cap = "Distribution of library users.", fig.width=6, fig.height=1, cache=TRUE, message=FALSE}
+```{r echo=FALSE, fig.cap = "Distribution of Library Users across America.", fig.width=6, fig.height=1, cache=FALSE, message=FALSE}
 source('visualizations/libraries/users.r')
 ```
 
@@ -91,46 +99,163 @@ knitr::kable(t(as.matrix(summary(data$Users.per.HundredK, digits=3))))
 
 \vspace{0pt}
 
-Over the range from 3,8053 to 7,8466 users per 100,000 people, the distribution is approximately understood due to the difference between the mean (53,507 users for every 100,000 people) and median (54,413 users for every 100,000 people). Ohio (78,466 users for every 100,000 people) and Minnesota (75,319 users for every 100,000 people) are the only two outliers in the dataset and lie in the positive direction.
-
+Over the range from 38,053 to 78,466 Library Users, the distribution is approximately understood due to the difference between the mean (53,507 Library Users) and median (54,413 Library Users). Ohio (78,466 Library Users) and Minnesota (75,319 Library Users) are the only two outliers in the dataset and lie in the positive direction. Vermont and Maine, which have the most Libraries, are not outliers for the most Library Users. Vermont (51,623 Library Users) and Maine (57,094 Library Users) fall just below the median and just below the third quartile, respectively, both within the interquartile range.
 \newpage
+Just as Libraries and Library Users were examined, so must Graduation Rates. A boxplot shows the large spread of data for Graduation Rates across the country. As is evident visually in the boxplot, and numerically because the median is greater than the mean, the data is skewed in the negative direction.
 
 \vspace{20pt}
 
-```{r echo=FALSE, fig.cap = "Caption", fig.width=6, fig.height=3, cache=TRUE, message=FALSE}
-source('visualizations/associations/scatterplot.r')
+```{r echo=FALSE, fig.cap = "Distribution of Graduation Rates across America.", fig.width=6, fig.height=1, cache=FALSE, message=FALSE}
+source('visualizations/graduation/rates.r')
 ```
 
 ```{r echo=FALSE}
-knitr::kable(t(as.matrix(summary(data$Libraries.per.HundredK))))
+knitr::kable(t(as.matrix(summary(data$Graduation.Rate, digits=3))))
 ```
 
-\vspace{10pt}
+\vspace{0pt}
+
+While a test for traditional outliers yields none, there are still three relative outliers which pull the center of the graph in the negative direction. These three states, New Mexico, Nevada, and Oregon have the lowest Graduation Rates in America, with values of 68.6, 71.3, and 73.8 respectively. The large interquartile range suggests that there is not that much variability in the data.
+
+\newpage
+
+# Further Analysis
+
+Given the background context behind Library Users and Graduation Rates, it is now possible to analyze a possible association between the two. Plotting Graduation Rates as the explanatory variable and Library Users as a response variable produces the following results on a scatterplot:
 
 \vspace{20pt}
 
-```{r echo=FALSE, fig.cap = "Caption", fig.width=6, fig.height=3, cache=TRUE, message=FALSE}
+```{r echo=FALSE, fig.cap = "The relationship between Graduation Rates and Library Users.", fig.width=5, fig.height=2.5, cache=FALSE, message=FALSE}
+source('visualizations/associations/scatterplot.r')
+```
+
+\vspace{0pt}
+
+\newpage
+
+The scatterplot depicted in Figure 4 shows a weak, nonlinear association between Graduation Rates and Library Users. There do not appear to be any outliers in the data that cannot be explained by either their distribution in comparison to their explanatory or response variable pools. Further investigating the relationship with a Least Squares Regression Line results in the following:
+
+\vspace{20pt}
+
+```{r echo=FALSE, fig.cap = "The relationship between Graduation Rates and Library Users with Least Squares Regression Line.", fig.width=5, fig.height=2.5, cache=FALSE, message=FALSE}
 source('visualizations/associations/regression.r')
 ```
 
 ```{r echo=FALSE}
-knitr::kable(t(as.matrix(summary(data$Libraries.per.HundredK))))
+knitr::kable(as.matrix(regression_data))
 ```
 
-\vspace{10pt}
+\vspace{0pt}
+
+The correlation coefficient for the LSRL in Figure 5 is 0.036, reaffirming that there is a very weak positive linear association between Graduation Rates and Library Users. 0.0013% of the variation in Library Users can be explained by the approximate linear relationship with Graduation Rate. For every percent increase in Graduation Rates, the model predicts an almost negligable average increase of 82 Library Users. At a Graduation Rates value of 0 people, the model predicts a Library User value of 2.15078E-5 units. This value, as it stands, is rather meaningless in the context of an extremely weak correlation coefficient.
+
+A residual plot of the association between Graduation Rates and Library Users would suggest, however, that a the best type of regression model is, in fact, linear.
+
+\vspace{20pt}
+
+```{r echo=FALSE, fig.cap = "A residual plot for Graduation Rates and Library Users data.", fig.width=5, fig.height=2.5, cache=FALSE, message=FALSE}
+source('visualizations/associations/residual.r')
+```
+
+\vspace{0pt}
+
+Figure 6 graphs the residuals of Graduation Rates and Library Users on the y-axis and the Graduation Rates on the x-axis. The plot shows a random pattern, with variation in the sign of the values. Such a pattern would indicate that a linear model is appropriate for the data set, though it does not comment on the fit of the LSRL. Had the residual plot been non-random, with a parabolic shape, for example, it would indicate that another type of regression analysis would better serve this dataset.
 
 \newpage
 
-```{r echo=FALSE}
-source('visualizations/appendix.r')
+# Conclusion
+
+Throughout the statistical analysis and data exploration above, there is no association between Graduation Rates and Library Users. As Graduation Rates serve as a quantitative measure of educational attainment, and there is no association between the data, it is not possible to answer the project's framing question of “do smarter people use libraries more?”
+
+# Further Study
+
+This study neglects any hidden variables, and the effect that they may have on Libraries, Graduation Rates, and Library Users. It would be interesting to examine the effect of GDP per 100,000 people per state, specifically looking at the association between GDP and Graduation Rate, or GDP and Libraries.
+
+Additionally, further research could be done by region in order to see if there are trends in Graduation Rates or Library Users across America. See the appendix for more graphs that begin to explore Graduation Rates and Library Users by region.
+
+\newpage
+
+\begin{center}
+\textbf{Bibliography}
+\end{center}
+
+\setstretch{1.0}
+\noindent
+"A History Of US Public Libraries · DPLA Omeka". 2017. *Dp.La.* https://dp.la/exhibitions/exhibits/show/history-us-public-libraries.
+\newline
+\newline
+\noindent
+Cunningham, Anne, and Keith Stanovich. 2001. *What Reading Does For The Mind*. Ebook. Journal of Direct Instruction. http://www.csun.edu/~krowlands/Content/Academic_Resources/Reading/Useful Articles/Cunningham-What Reading Does for the Mind.pdf.
+\newline
+\newline
+\noindent
+"Global Library Statistics". 2017. *Oclc.Org*. https://www.oclc.org/en/global-library-statistics.html.
+\newline
+\newline
+\noindent
+"State Profiles: FY 2014 Public Libraries Survey (Data) | Data Catalog". 2017. *Data.Imls.Gov*. https://data.imls.gov/Public-Libraries-Survey/State-Profiles-FY-2014-Public-Libraries-Survey-Dat/mph3-8hz6
+\newline
+\newline
+\noindent
+"The Condition Of Education - Elementary And Secondary Education - Student Effort, Persistence And Progress - Public High School Graduation Rates - Indicator April (2017)". 2017. *Nces.Ed.Gov.* https://nces.ed.gov/programs/coe/indicator_coi.asp.
+
+
+\newpage
+\begin{center}
+\textbf{Appendix}
+\end{center}
+<!-- -->
+```{r echo=FALSE, fig.cap=FALSE}
+# Sort data by state alphabetically
+alpha_state <- data[order(data$State),]
+# Remove index generated by sort
+row.names(alpha_state) <- NULL
+# Remove periods from column names
+names(alpha_state) <- gsub("\\.", " ", names(alpha_state))
+# Make table
+knitr::kable(alpha_state, format = "latex", booktabs = T, caption='Table 1: Compiled Dataset') %>%
+  add_header_above(c(" " = 2, "Raw Values" = 4, "Adjusted per 100,000 people per state" = 3)) %>%
+  kable_styling(latex_options = c("scale_down", "hold_position"))
 ```
 
+\noindent
+\textit{Sources: IMLS FY 2014 Public Libraries Survey, NCES FY 2014 Public High School Graduation Rates.}
 
-[^1]: Test footnote 1.
-[^2]: Test footnote 1.
+\newpage
 
-<style>
-p.caption {
-  font-size: 10pt;
-}
-</style>
+\vspace{20pt}
+
+```{r echo=FALSE, fig.cap = "Library count by region.", fig.width=5, fig.height=2.5, cache=FALSE, message=FALSE}
+source('visualizations/libraries/count-region.r')
+```
+
+\vspace{0pt}
+
+\vspace{20pt}
+
+```{r echo=FALSE, fig.cap = "Library Users by region.", fig.width=5, fig.height=2.5, cache=FALSE, message=FALSE}
+source('visualizations/libraries/users-region.r')
+```
+
+\vspace{0pt}
+
+\vspace{20pt}
+
+```{r echo=FALSE, fig.cap = "Graduation Rates by region.", fig.width=5, fig.height=2.5, cache=FALSE, message=FALSE}
+source('visualizations/graduation/region.r')
+```
+
+\vspace{0pt}
+
+\vspace{20pt}
+
+```{r echo=FALSE, fig.cap = "Association between Graduation Rates and Library Users data by region.", fig.width=6, fig.height=5, cache=FALSE, message=FALSE}
+source('visualizations/associations/region.r')
+```
+
+\vspace{0pt}
+
+[^1]: Cunningham, Anne, and Keith Stanovich. 2001. *What Reading Does For The Mind*. Ebook. Journal of Direct Instruction. http://www.csun.edu/~krowlands/Content/Academic_Resources/Reading/Useful Articles/Cunningham-What Reading Does for the Mind.pdf.
+[^2]: "Global Library Statistics". 2017. *Oclc.Org*. https://www.oclc.org/en/global-library-statistics.html.
+[^3]: "A History Of US Public Libraries · DPLA Omeka". 2017. *Dp.La.* https://dp.la/exhibitions/exhibits/show/history-us-public-libraries.
+[^4]: "State Profiles: FY 2014 Public Libraries Survey (Data) | Data Catalog". 2017. *Data.Imls.Gov*. https://data.imls.gov/Public-Libraries-Survey/State-Profiles-FY-2014-Public-Libraries-Survey-Dat/mph3-8hz6

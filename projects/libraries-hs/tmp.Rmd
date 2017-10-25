@@ -1,0 +1,38 @@
+
+```{r echo=FALSE, fig.cap = "Caption", fig.width=6, fig.height=3, cache=TRUE, message=FALSE}
+source('visualizations/associations/scatterplot.r')
+```
+
+```{r echo=FALSE}
+knitr::kable(t(as.matrix(summary(data$Libraries.per.HundredK))))
+```
+
+\vspace{10pt}
+
+\vspace{20pt}
+
+```{r echo=FALSE, fig.cap = "Caption", fig.width=6, fig.height=3, cache=TRUE, message=FALSE}
+source('visualizations/associations/regression.r')
+```
+
+```{r echo=FALSE}
+knitr::kable(t(as.matrix(summary(data$Libraries.per.HundredK))))
+```
+
+\vspace{10pt}
+
+\newpage
+
+```{r echo=FALSE}
+source('visualizations/appendix.r')
+```
+
+
+[^1]: Test footnote 1.
+[^2]: Test footnote 1.
+
+<style>
+p.caption {
+  font-size: 10pt;
+}
+</style>
